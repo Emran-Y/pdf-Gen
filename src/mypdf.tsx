@@ -1,5 +1,5 @@
 import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
-import ElectricityDetails from './types/ElectricityDetails';
+import ElectricityDetails from './types/electricityDetails';
 
 // Define an interface for the field names
 interface ElectricityFieldNames {
@@ -95,6 +95,8 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingLeft: 80,
     paddingRight: 80,
+    paddingTop: 70,
+    paddingBottom: 70,
   },
   header: {
     marginBottom: 30,
@@ -216,10 +218,11 @@ const sections = [
   },
 ];
 
+
 const ElectricityPDF = ({ electricityDetails }: { electricityDetails: ElectricityDetails }) => {
   return (
     <Document>
-      <Page size="A4" style={styles.page} wrap={false}>
+      <Page size="A4" style={styles.page}>
         <View style={styles.header}>
           <Image src='/logo.png' style={styles.logo} />
         </View>
@@ -237,6 +240,8 @@ const ElectricityPDF = ({ electricityDetails }: { electricityDetails: Electricit
             </View>
           </View>
         ))}
+
+        <Image src='https://via.placeholder.com/150/771796' style={styles.logo} />
       </Page>
     </Document>
   );
