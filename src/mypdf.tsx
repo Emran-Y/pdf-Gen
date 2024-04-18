@@ -1,5 +1,6 @@
 import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
 import ElectricityDetails from './types/electricityDetails';
+import { pdf } from '@react-pdf/renderer';
 
 // Define an interface for the field names
 interface ElectricityFieldNames {
@@ -139,6 +140,11 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     fontFamily: 'Helvetica-Bold',
   },
+  imageTitle:{
+    fontSize: 13,
+    marginBottom: 30,
+    fontFamily: 'Helvetica-Bold',
+  },
   value: {
     backgroundColor: '#fcfcfc',
     borderRadius: 20,
@@ -241,10 +247,29 @@ const ElectricityPDF = ({ electricityDetails }: { electricityDetails: Electricit
           </View>
         ))}
 
-        <Image src='https://via.placeholder.com/150/771796' style={styles.logo} />
+        <Text style={styles.imageTitle}>Image Attachments</Text>
+        <View style={{maxWidth:'400px',flexDirection:'row',gap:'10px',flexWrap:'wrap',}}>
+
+          {electricityDetails.images.map((image, index) => (
+            <Image key={index} src={image} style={{ width: 180, height: 130}} />
+          ))}
+
+        </View>
+
       </Page>
     </Document>
   );
 };
 
-export default ElectricityPDF;
+
+function generatePDFBlob(dummyElectricityDetails: ElectricityDetails) {
+  pdf(<ElectricityPDF electricityDetails={dummyElectricityDetails} />)
+    .toBlob()
+    .then((blob) => {
+      console.log('Blob:', blob);
+    });
+}
+
+export default generatePDFBlob;
+
+// export default ElectricityPDF;
