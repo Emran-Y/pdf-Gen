@@ -266,13 +266,19 @@ const ElectricityPDF = ({ electricityDetails }: { electricityDetails: Electricit
 };
 
 
-function generatePDFBlob(dummyElectricityDetails: ElectricityDetails) {
-  pdf(<ElectricityPDF electricityDetails={dummyElectricityDetails} />)
-    .toBlob()
-    .then((blob) => {
-      console.log('Blob:', blob);
-    });
+function generatePDFBlob(dummyElectricityDetails: ElectricityDetails): Promise<Blob> {
+  return new Promise((resolve, reject) => {
+    pdf(<ElectricityPDF electricityDetails={dummyElectricityDetails} />)
+      .toBlob()
+      .then((blob) => {
+        resolve(blob);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 }
+
 
 export default generatePDFBlob;
 

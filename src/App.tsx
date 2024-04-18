@@ -1,58 +1,7 @@
 import ElectricityDetails from "./types/electricityDetails";
 import generatePDFBlob from "./mypdf";
 
-const buttonStyle: React.CSSProperties = {
-  backgroundColor: 'white',
-  color: 'skyblue',
-  padding: '10px 20px',
-  border: 'none',
-  borderRadius: '5px',
-  cursor: 'pointer',
-  fontSize: '16px',
-  fontWeight: 'bold',
-  textDecoration: 'none',
-  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-  transition: 'background-color 0.3s, color 0.3s',
-};
-
 const App: React.FC = () => {
-  // const [blob, setBlob] = useState<Blob | null>(null);
-
-  // Dummy appointment details
-  // const handleClick = () => {
-  //   pdf(<ElectricityPDF electricityDetails={dummyElectricityDetails} />)
-  //     .toBlob()
-  //     .then((blob) => {
-  //       setBlob(blob);
-  //       sendToServer(blob);
-  //     });
-  // };
-
-  // const sendToServer = (blobData: Blob) => {
-  //   const formData = new FormData();
-  //   formData.append('pdfFile', blobData, 'electricity_details.pdf');
-
-  //   fetch('http://localhost:4000/upload-pdf', {
-  //     method: 'POST',
-  //     body: formData,
-  //   })
-  //     .then((response) => {
-  //       if (response.ok) {
-  //         console.log('PDF file successfully sent to server.');
-  //       } else {
-  //         console.error('Failed to send PDF file to server.');
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error sending PDF file to server:', error);
-  //     });
-  // };
-
-
-  // if (blob){
-  //   console.log(blob)
-  // }
-
   const dummyElectricityDetails: ElectricityDetails = {
     address1: '123 Main St',
     address2: 'Apt 101',
@@ -105,8 +54,14 @@ const App: React.FC = () => {
     ],
   };
   
-
+  // Calling the generatePDFBlob function
   generatePDFBlob(dummyElectricityDetails)
+    .then((blob) => {
+      console.log(blob)
+    })
+    .catch((error) => {
+      console.error('Error generating PDF blob:', error);
+    });
 
 
   return (
@@ -118,17 +73,5 @@ const App: React.FC = () => {
   );
 };
 
-// <div>
-    //   <PDFDownloadLink
-    //     document={<ElectricityPDF electricityDetails={dummyElectricityDetails} />}
-    //     fileName="electricity_details.pdf"
-    //   >
-    //     {({}) => (
-    //       <button style={buttonStyle} onClick={handleClick}>
-    //         Download
-    //       </button>
-    //     )}
-    //   </PDFDownloadLink>
-    // </div>
 
 export default App;
