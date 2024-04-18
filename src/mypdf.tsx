@@ -1,6 +1,7 @@
 import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
 import ElectricityDetails from './types/electricityDetails';
 import { pdf } from '@react-pdf/renderer';
+import { Key } from 'react';
 
 // Define an interface for the field names
 interface ElectricityFieldNames {
@@ -228,36 +229,39 @@ const sections = [
 const ElectricityPDF = ({ electricityDetails }: { electricityDetails: ElectricityDetails }) => {
   return (
     <Document>
-      <Page size="A4" style={styles.page}>
-        <View style={styles.header}>
-          <Image src='/logo.png' style={styles.logo} />
-        </View>
+  <Page size="A4" style={styles.page}>
+    <View style={styles.header}>
+      <Image src='/logo.png' style={styles.logo} />
+    </View>
 
-        {sections.map(section => (
-          <View key={section.title} style={styles.mainSection}>
-            <Text style={styles.sectionTitle}>{section.title}</Text>
-            <View style={styles.section}>
-              {section.fields.map(field => (
-                <View key={field} style={styles.subSection}>
-                  <Text style={styles.label}>{fieldLabels[field as keyof ElectricityFieldNames]}</Text>
-                  <Text style={styles.value}>{electricityDetails[field as keyof ElectricityFieldNames]}</Text>
-                </View>
-              ))}
+    {sections.map(section => (
+      <View key={section.title} style={styles.mainSection}>
+        <Text style={styles.sectionTitle}>{section.title}</Text>
+        <View style={styles.section}>
+          {section.fields.map(field => (
+            <View key={field} style={styles.subSection}>
+              <Text style={styles.label}>
+                {fieldLabels[field as keyof ElectricityFieldNames] || ''}
+              </Text>
+              <Text style={styles.value}>
+                {electricityDetails[field as keyof ElectricityFieldNames] || ''}
+              </Text>
             </View>
-          </View>
-        ))}
-
-        <Text style={styles.imageTitle}>Image Attachments</Text>
-        <View style={{maxWidth:'400px',flexDirection:'row',gap:'10px',flexWrap:'wrap',}}>
-
-          {electricityDetails.images.map((image, index) => (
-            <Image key={index} src={image} style={{ width: 180, height: 130}} />
           ))}
-
         </View>
+      </View>
+    ))}
 
-      </Page>
-    </Document>
+    <Text style={styles.imageTitle}>Image Attachments</Text>
+    <View style={{ maxWidth: '400px', flexDirection: 'row', gap: '10px', flexWrap: 'wrap' }}>
+  {electricityDetails.images && electricityDetails.images.map((image: string | undefined, index: Key | null | undefined) => (
+    <Image key={index} src={image || ''} style={{ width: 180, height: 130 }} />
+  ))}
+</View>
+
+  </Page>
+</Document>
+
   );
 };
 
