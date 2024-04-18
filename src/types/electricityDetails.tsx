@@ -39,6 +39,7 @@ interface ElectricityDetails {
   ductingLength: string;
   groundWorksDescription: string;
   installationEarthingSetup: string;
+  images: string[];
 }
 
 export default ElectricityDetails;
