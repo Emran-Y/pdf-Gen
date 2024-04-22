@@ -1,5 +1,6 @@
 import ElectricityDetails from "./types/electricityDetails";
 import generatePDFBlob from "./mypdf";
+// import ElectricityPDF from "./mypdf";
 
 const App: React.FC = () => {
   const dummyElectricityDetails: ElectricityDetails = {
@@ -65,10 +66,9 @@ const App: React.FC = () => {
 
 
   return (
-    <div>
-     <>
-      <h1>Hello World</h1>
-     </>
+    <div 
+>
+      Hello World
     </div>
   );
 };

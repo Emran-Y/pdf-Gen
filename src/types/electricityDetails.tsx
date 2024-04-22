@@ -41,3 +41,5 @@ interface ElectricityDetails {
   installationEarthingSetup?: string;
   images?: string[];
 }
+
+export default ElectricityDetails;

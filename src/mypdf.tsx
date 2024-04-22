@@ -1,6 +1,6 @@
 import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
-import ElectricityDetails from './types/electricityDetails';
 import { pdf } from '@react-pdf/renderer';
+import ElectricityDetails from './types/electricityDetails';
 import { Key } from 'react';
 
 // Define an interface for the field names
@@ -45,6 +45,7 @@ interface ElectricityFieldNames {
   ductingLength: string;
   groundWorksDescription: string;
   installationEarthingSetup: string;
+  images: string;
 }
 
 // Define a mapping object for field names to display labels
